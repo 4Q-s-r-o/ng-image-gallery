@@ -1,6 +1,6 @@
 {
   "name": "ng-image-gallery-flexible",
-  "version": "v2.1.4",
+  "version": "v2.1.5",
   "description": "Probably the best angular inline and modal image gallery combined...",
   "main": "dist/ng-image-gallery.js",
   "directories": {
@@ -9,16 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/todornikolov/ng-image-gallery-flexible.git"
-  },
   "author": "Uday Hiwarale <uhiwarale@gmail.com> (https://github.com/thatisuday)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/thatisuday/ng-image-gallery/issues"
   },
-  "homepage": "https://github.com/thatisuday/ng-image-gallery#readme",
   "devDependencies": {
     "express": "^4.15.2",
     "gulp": "^3.9.1",
