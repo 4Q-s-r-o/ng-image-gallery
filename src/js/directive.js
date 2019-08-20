@@ -58,7 +58,7 @@
 				var flexiAttributes = element.parent().scope().$parent.flexiAttributes;
 
 				if (flexiAttributes) {
-					for (var attribute of flexiAttributes) {
+					for (var attribute in flexiAttributes) {
 						element.attr(attribute.name, attribute.value);
 					}
 				}
