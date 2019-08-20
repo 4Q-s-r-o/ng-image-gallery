@@ -28,10 +28,11 @@
 			    deleteButtonTitle       : 'Delete this image...',
 			    editButtonTitle         : 'Edit this image...',
 			    closeButtonTitle        : 'Close',
-			    externalLinkButtonTitle : 'Open image in new tab...'			    
+			    externalLinkButtonTitle : 'Open image in new tab...'
 			},
 			itemClass: 'thumb',
-			flexiAttributes: {}
+			flexiAttributes: {},
+            defaultImage: 'images/no-image.png'
 		};
 
 		return{
@@ -224,6 +225,7 @@
 				piracy			: 	'=?',		// true|false
 				imgAnim 		: 	'@?',		// {name}
 				textValues      :   '=?',		// {}
+				defaultImage    :   '=?',		// {}
 
 				onOpen 			: 	'&?',		// function
 				onClose 		: 	'&?',		// function,
@@ -283,7 +285,10 @@
 
 										// Images container
 										'<div class="galleria-images img-anim-{{imgAnim}} img-move-dir-{{_imgMoveDirection}}">'+
-											'<img class="galleria-image" ng-right-click ng-repeat="image in images track by image.id" ng-if="_activeImg == image" ng-src="{{image.url}}" ondragstart="return false;" ng-attr-alt="{{image.alt || undefined}}"/>'+
+											'<img class="galleria-image" ng-right-click ng-repeat="image in images' +
+				' track by image.id" ng-if="_activeImg == image" data-image-url="{{image.url}}"' +
+				' data-default-image="{{defaultImage}}"' +
+				' ondragstart="return false;" ng-attr-alt="{{image.alt || undefined}}"/>'+
 										'</div>'+
 
 										// Image description container
@@ -466,6 +471,7 @@
 						scope.piracy 	 	 = 	(conf.piracy 		!= undefined) ? conf.piracy 	 	: 	(scope.piracy 		!= undefined) 	?  scope.piracy			: 	ngImageGalleryOpts.piracy;
 						scope.imgAnim 	 	 = 	(conf.imgAnim 		!= undefined) ? conf.imgAnim 	 	: 	(scope.imgAnim 		!= undefined) 	?  scope.imgAnim		: 	ngImageGalleryOpts.imgAnim;
                         scope.textValues     =  (conf.textValues    != undefined) ? conf.textValues     :   (scope.textValues   != undefined)   ?  scope.textValues     :   ngImageGalleryOpts.textValues;
+                        scope.defaultImage     =  (conf.defaultImage    != undefined) ? conf.defaultImage     :   (scope.defaultImage   != undefined)   ?  scope.defaultImage     :   ngImageGalleryOpts.defaultImage;
 						scope.itemClass 	 	 = 	(conf.itemClass 		!= undefined) ? conf.itemClass 	 	: 	(scope.itemClass 		!= undefined) 	?  scope.itemClass		: 	ngImageGalleryOpts.itemClass;
                         scope.flexiAttributes     =  (conf.flexiAttributes    != undefined) ? conf.flexiAttributes     :   (scope.flexiAttributes   != undefined)   ?  scope.flexiAttributes     :   ngImageGalleryOpts.flexiAttributes;
 					});
