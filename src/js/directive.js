@@ -242,9 +242,10 @@
 							'<div ng-if="thumbnails && !inline" class="ng-image-gallery-thumbnails">' +
  								'<div class="{{ itemClass }}" ng-gallery-flexi-attributes ng-repeat="image in images' +
 				' track by image.id" ng-if="thumbLimit ? $index < thumbLimit : true"' +
-				' ng-click="methods.open($index);" data-image-url="{{image.thumbUrl || image.url}}"' +
+				' ng-click="methods.open($index);"' +
 				' title="{{image.title}}"' +
 				' async-kind="thumb" ng-style="{\'width\' : thumbSize+\'px\', \'height\' : thumbSize+\'px\'}">'+
+									'<img data-image-url="{{image.thumbUrl || image.url}}">' +
  									'<div class="loader"></div>'+
  								'</div>' +
  							'</div>' +
