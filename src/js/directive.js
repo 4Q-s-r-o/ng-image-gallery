@@ -58,7 +58,7 @@
 				var flexiAttributes = element.parent().scope().$parent.flexiAttributes;
 
 				if (flexiAttributes) {
-					for (var attribute of flexiAttributes) {
+					for (var attribute in flexiAttributes) {
 						element.attr(attribute.name, attribute.value);
 					}
 				}
@@ -240,7 +240,7 @@
 							// Thumbnails container
 							//  Hide for inline gallery
 							'<div ng-if="thumbnails && !inline" class="ng-image-gallery-thumbnails">' +
- 								'<div class="{{ itemClass }}" ng-gallery-flexi-attributes ng-repeat="image in images track by image.id" ng-if="thumbLimit ? $index < thumbLimit : true" ng-click="methods.open($index);" show-image-async="{{image.thumbUrl || image.url}}" title="{{image.title}}" async-kind="thumb" ng-style="{\'width\' : thumbSize+\'px\', \'height\' : thumbSize+\'px\'}">'+
+ 								'<div class="{{ itemClass }}" ng-gallery-flexi-attributes ng-repeat="image in images track by image.id" ng-if="thumbLimit ? $index < thumbLimit : true" ng-click="methods.open($index);" data-image-url="{{image.thumbUrl || image.url}}" title="{{image.title}}" async-kind="thumb" ng-style="{\'width\' : thumbSize+\'px\', \'height\' : thumbSize+\'px\'}">'+
  									'<div class="loader"></div>'+
  								'</div>' +
  							'</div>' +

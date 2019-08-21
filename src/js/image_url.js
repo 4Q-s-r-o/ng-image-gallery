@@ -1,10 +1,5 @@
 /**
  * Direktíva zabezpečujúca načítanie obrázka cez xhr aby tento request prešiel rovnakým zabezpečením ako všetky ostatné
- * data-image-url : url obrázka, ktorá by normálne patrila do img src
- * data-default-image : url lokálneho obrázka, ktorý sa použije ako default keď sa hlavný nepodarí natiahnuť
- * [default 'images/no-image.png']
- * data-dafault-image-class : classa, ktorá je priradená elementu default imagu - umožnuje custom styling
- * [default 'default-image']
  */
 (function () {
 	angular.module('thatisuday.ng-image-gallery')
@@ -88,7 +83,14 @@
 			if (response.status === 200) {
 				var blob = response.data;
 				var imageBlobUrl = URL.createObjectURL(blob);
-				imageElement.attr('src', imageBlobUrl);
+				if (imageElement[0].nodeName === 'DIV') {
+					//Ak je element, na ktorom je direktiva 'DIV', jedna sa o thumb a teda ponechavam povodnu logiku
+					// ng-image-gallery pre thumb (v direktive showImageAsync)
+                    imageElement.css({ backgroundImage: 'url("' + imageBlobUrl + '")' });
+                    imageElement.empty();
+                } else {
+                    imageElement.attr('src', imageBlobUrl);
+				}
 			} else {
 				replaceWithDefaultImage(imageElement, imageScope);
 			}
