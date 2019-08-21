@@ -1,4 +1,4 @@
-var 
+var
 	gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	concat = require('gulp-concat'),
