@@ -3,20 +3,20 @@
  */
 (function () {
 	angular.module('thatisuday.ng-image-gallery')
-		.directive('imageUrl', ['$http', '$q', '$compile',
+		.directive('ngImageGalleryUrl', ['$http', '$q', '$compile',
 				function ($http, $q, $compile) {
 					return {
 						restrict: 'A',
 						link: function (scope, elem, attrs) {
-							ImageUrl($http, $q, $compile, scope, elem, attrs);
+                            NgImageGalleryUrl($http, $q, $compile, scope, elem, attrs);
 						}
 					};
 				}
 			]
 		);
 
-	function ImageUrl($http, $q, $compile, imageScope, imageElement, attrs) {
-		//NOTE: ImageUrl je veľkým lebo sa k tomu viac správam ako k triede než k funkcií
+	function NgImageGalleryUrl($http, $q, $compile, imageScope, imageElement, attrs) {
+		//NOTE: NgImageGalleryUrl je veľkým lebo sa k tomu viac správam ako k triede než k funkcií
 		var defaultImage = {
 			src: 'images/no-image.png',
 			cssClass: 'default-image'
@@ -36,7 +36,7 @@
 				defaultImage.cssClass = attrs.defaultImageClass;
 			}
 
-			attrs.$observe('imageUrl', imageUrlObserver);
+			attrs.$observe('ngImageGalleryUrl', imageUrlObserver);
 		}
 
 		/**

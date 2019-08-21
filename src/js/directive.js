@@ -240,7 +240,10 @@
 							// Thumbnails container
 							//  Hide for inline gallery
 							'<div ng-if="thumbnails && !inline" class="ng-image-gallery-thumbnails">' +
- 								'<div class="{{ itemClass }}" ng-gallery-flexi-attributes ng-repeat="image in images track by image.id" ng-if="thumbLimit ? $index < thumbLimit : true" ng-click="methods.open($index);" data-image-url="{{image.thumbUrl || image.url}}" title="{{image.title}}" async-kind="thumb" ng-style="{\'width\' : thumbSize+\'px\', \'height\' : thumbSize+\'px\'}">'+
+ 								'<div class="{{ itemClass }}" ng-gallery-flexi-attributes ng-repeat="image in images' +
+				' track by image.id" ng-if="thumbLimit ? $index < thumbLimit : true"' +
+				' ng-click="methods.open($index);" data-ng-image-gallery-url="{{image.thumbUrl || image.url}}"' +
+				' title="{{image.title}}" async-kind="thumb" ng-style="{\'width\' : thumbSize+\'px\', \'height\' : thumbSize+\'px\'}">'+
  									'<div class="loader"></div>'+
  								'</div>' +
  							'</div>' +
@@ -286,7 +289,7 @@
 										// Images container
 										'<div class="galleria-images img-anim-{{imgAnim}} img-move-dir-{{_imgMoveDirection}}">'+
 											'<img class="galleria-image" ng-right-click ng-repeat="image in images' +
-				' track by image.id" ng-if="_activeImg == image" data-image-url="{{image.url}}"' +
+				' track by image.id" ng-if="_activeImg == image" data-ng-image-gallery-url="{{image.url}}"' +
 				' data-default-image="{{defaultImage}}"' +
 				' ondragstart="return false;" ng-attr-alt="{{image.alt || undefined}}"/>'+
 										'</div>'+
@@ -309,7 +312,10 @@
 										// Image bubble navigation container
 										'<div class="galleria-bubbles-wrapper" ng-if="bubbles && imgBubbles" ng-hide="images.length == 1" ng-style="{\'height\' : bubbleSize+\'px\'}" bubble-auto-fit>'+
 											'<div class="galleria-bubbles" bubble-auto-scroll ng-style="{\'margin-left\': _bubblesContainerMarginLeft}">'+
-												'<span class="galleria-bubble img-bubble" ng-click="_setActiveImg(image);" ng-repeat="image in images track by image.id" ng-class="{active : (_activeImg == image)}" show-image-async="{{image.bubbleUrl || image.thumbUrl || image.url}}" async-kind="bubble" ng-style="{\'width\' : bubbleSize+\'px\', \'height\' : bubbleSize+\'px\', \'border-width\' : bubbleSize/10+\'px\', margin: _bubbleMargin}"></span>'+
+												'<span class="galleria-bubble img-bubble"' +
+				' ng-click="_setActiveImg(image);" ng-repeat="image in images track by image.id" ng-class="{active :' +
+				' (_activeImg == image)}" ng-image-gallery-url="{{image.bubbleUrl || image.thumbUrl || image.url}}"' +
+				' async-kind="bubble" ng-style="{\'width\' : bubbleSize+\'px\', \'height\' : bubbleSize+\'px\', \'border-width\' : bubbleSize/10+\'px\', margin: _bubbleMargin}"></span>'+
 											'</div>'+
 										'</div>'+
 
@@ -365,23 +371,13 @@
 						// Show loader
 						if(!imgObj.hasOwnProperty('cached')) scope._showLoader();
 
-						// Process image
-						var img = new Image();
-						img.src = imgObj.url;
-						img.onload = function(){
-							// Hide loader
-							if(!imgObj.hasOwnProperty('cached')) scope._hideLoader();
+                        // Hide loader
+                        if(!imgObj.hasOwnProperty('cached')) scope._hideLoader();
 
-							// Cache image
-							if(!imgObj.hasOwnProperty('cached')) imgObj.cached = true;
+                        // Cache image
+                        if(!imgObj.hasOwnProperty('cached')) imgObj.cached = true;
 
-							deferred.resolve(imgObj);
-						}
-						img.onerror = function(){
-							if(!imgObj.hasOwnProperty('cached')) scope._hideLoader();
-
-							deferred.reject('Error when loading img');
-						}
+                        deferred.resolve(imgObj);
 
 						return deferred.promise;
 					}
